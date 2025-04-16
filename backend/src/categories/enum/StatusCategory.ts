@@ -1,3 +1,0 @@
-enum StatusCategory{
-    INACTIVE, ACTIVE
-}

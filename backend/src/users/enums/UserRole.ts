@@ -1,3 +1,0 @@
-enum UserRole{
-    ADMIN, USER
-}
