@@ -1,7 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Order } from '../entities/Order';
 
 @Injectable()
 export class OrderService {
+
+  constructor(
+    @InjectRepository(Order)
+    private orderRepository: Repository<Order>
+  ){} 
+  
   create() {
     return 'This action adds a new order';
   }
