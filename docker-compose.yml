@@ -1,0 +1,36 @@
+services:
+  frontend:
+    container_name: front
+    build:
+      context: ./frontend
+    network_mode: host
+    depends_on:
+      - backend
+
+  backend:
+    container_name: back
+    build:
+      context: ./backend
+    network_mode: host
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=${DB_NAME}
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=${DB_PASS}
+    command: bash -c "bundle exec rails db:prepare && bundle exec puma -C config/puma.rb"
+    depends_on:
+      - db
+
+  db:
+    container_name: compose_db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql_data:
