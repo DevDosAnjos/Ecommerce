@@ -17,6 +17,7 @@ services:
       - DATABASE_NAME=${DB_NAME}
       - DATABASE_USER=root
       - DATABASE_PASSWORD=${DB_PASS}
+      - RAILS_ENV=development
     command: bash -c "bundle exec rails db:prepare && bundle exec puma -C config/puma.rb"
     depends_on:
       - db

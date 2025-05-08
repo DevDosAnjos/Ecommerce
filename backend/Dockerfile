@@ -21,7 +21,7 @@ WORKDIR /app
 
 # Copy Gemfiles and install gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler -v "$BUNDLER_VERSION" && bundle install --jobs 4 --without development test
+RUN gem install bundler -v "$BUNDLER_VERSION" && bundle install --jobs 4 --without production test
 
 # Copy the rest of the application code
 COPY . .
